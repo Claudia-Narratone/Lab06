@@ -11,6 +11,7 @@ public class Model {
 	private final static int NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN = 3;
 	private final static int NUMERO_GIORNI_CITTA_MAX = 6;
 	private final static int NUMERO_GIORNI_TOTALI = 15;
+	
 	private List<Citta> leCitta;
 	private List<Citta> best;
 
@@ -20,13 +21,9 @@ public class Model {
 	}
 
 	// of course you can change the String output with what you think works best
-	public String getUmiditaMedia(int mese, Citta citta) {
+	public double getUmiditaMedia(int mese, Citta citta) {
 		MeteoDAO dao=new MeteoDAO();
-		String soluzione = null;
-		for(Citta c:leCitta) {
-			soluzione+=citta+": "+dao.getUmiditaMedia(mese, citta)+"\n";
-		}
-		return soluzione;
+		return dao.getUmiditaMedia(mese, citta);
 	}
 	
 	// of course you can change the String output with what you think works best
@@ -117,5 +114,12 @@ public class Model {
 			}
 		}
 		return costo;
+	}
+
+	public List<Citta> getLeCitta() {
+		List<Citta> citta=new ArrayList<>();
+		MeteoDAO dao = new MeteoDAO();
+		citta = dao.getAllCitta();
+		return citta;
 	}
 }
